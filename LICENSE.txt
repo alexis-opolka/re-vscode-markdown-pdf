@@ -1,6 +1,7 @@
-Copyright (c) yzane
+Copyright (c) 2016-2023 yzane
+Copyright (c) 2023-present alexis-opolka
 
-All rights reserved. 
+All rights reserved.
 
 MIT License
 
