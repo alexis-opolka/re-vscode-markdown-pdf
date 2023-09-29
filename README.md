@@ -2,6 +2,8 @@
 
 This extension converts Markdown files to pdf or html files.
 
+:warning: This Extension is currently a WIP (Work in Progress), please do not use it at its current state. :warning:
+
 > **Note:**  
 > This extension is originally a fork of [yzane/vscode-markdown-pdf](https://github.com/yzane/vscode-markdown-pdf/).
 
