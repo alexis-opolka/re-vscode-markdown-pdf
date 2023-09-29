@@ -7,7 +7,7 @@ This extension converts Markdown files to pdf or html files.
 
 In this fork, the focus is on printing PDF files, not images.  
 You'll find more support regarding the export to PDF with your VS Code
-extensions and the buil-in preview.
+extensions and the built-in preview.
 
 This fork was also made to support my extension to create graphs.
 
