@@ -1,4 +1,5 @@
 'use strict';
+
 var vscode = require('vscode');
 var path = require('path');
 var fs = require('fs');
@@ -6,6 +7,7 @@ var url = require('url');
 var os = require('os');
 var INSTALL_CHECK = false;
 
+// This method is called when the extension is activated
 function activate(context) {
   init();
 
@@ -18,16 +20,10 @@ function activate(context) {
   commands.forEach(function (command) {
     context.subscriptions.push(command);
   });
-
-  var isConvertOnSave = vscode.workspace.getConfiguration('markdown-pdf')['convertOnSave'];
-  if (isConvertOnSave) {
-    var disposable_onsave = vscode.workspace.onDidSaveTextDocument(function () { markdownPdfOnSave(); });
-    context.subscriptions.push(disposable_onsave);
-  }
 }
 exports.activate = activate;
 
-// this method is called when your extension is deactivated
+// this method is called when the extension is deactivated
 function deactivate() {
 }
 exports.deactivate = deactivate;
@@ -36,29 +32,31 @@ async function markdownPdf(option_type) {
 
   try {
 
-    // check active window
+    // Let's check if the active window is an editor
     var editor = vscode.window.activeTextEditor;
     if (!editor) {
-      vscode.window.showWarningMessage('No active Editor!');
+      vscode.window.showWarningMessage('You don\'t have any active editor!');
       return;
     }
 
-    // check markdown mode
+    // Let's check if the current file is a markdown file
     var mode = editor.document.languageId;
     if (mode != 'markdown') {
-      vscode.window.showWarningMessage('It is not a markdown mode!');
+      vscode.window.showWarningMessage('It\'s not a markdown file!');
       return;
     }
 
+    // Let's check if we can have the file
+    // and if the file is untitled.
     var uri = editor.document.uri;
     var mdfilename = uri.fsPath;
     var ext = path.extname(mdfilename);
     if (!isExistsPath(mdfilename)) {
       if (editor.document.isUntitled) {
-        vscode.window.showWarningMessage('Please save the file!');
+        vscode.window.showWarningMessage('Sorry, but we can\'t yet export an untitled file!');
         return;
       }
-      vscode.window.showWarningMessage('File name does not get!');
+      vscode.window.showWarningMessage('Soory, but we can\'t get the file!');
       return;
     }
 
